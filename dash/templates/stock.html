@@ -1,0 +1,40 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<form  action="{% url 'stock' %} "class="form-inline my-2 my-lg-0" method="POST">
+    {% csrf_token %}
+     <input class="form-control mr-sm-2" type="text" placeholder="Add stock" aria-label="Search" name="stock">
+     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add Stock</button>
+   </form> <br><br>
+   <table class="table table-bordered table-hover table-striped ">
+    <thead class="thead-dark" >
+      <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Market Cap</th>
+        <th scope="col">Ytd Change</th>
+        <th scope="col">Week52High</th>
+        <th scope="col">week52Low</th>
+      </tr>
+    </thead  >
+    <tbody>
+   {% if stock %}   
+      {% for output_item in output %}
+      <tr>
+        <th scope="row">{{output_item.companyName}}</th>
+        <td>$ {{output_item.latestPrice}}</td>
+        <td>${{output_item.marketCap}}</td>
+        <td>{{ output_item.ytdChange}}  %</td>
+        <td>${{output_item.week52High}}</td>
+        <td>${{output_item.week52Low}}</td>
+        {% endfor %}
+        </tr>
+        
+        
+     
+      
+      {% endif %}
+    </tbody>
+  </table><br>
+{% endblock %}

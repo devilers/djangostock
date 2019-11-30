@@ -1,0 +1,41 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+{% if ticker %}
+{{ticker}}
+{% endif %}
+{% if api %}
+    {% if  api == "error.." %}
+       Try again
+    {% else %}
+    <table class="table table-bordered table-hover table-striped ">
+         <thead class="thead-dark" >
+           <tr>
+             <th scope="col">Company Name</th>
+             <th scope="col">Price</th>
+             <th scope="col">Market Cap</th>
+             <th scope="col">Ytd Change</th>
+             <th scope="col">Week52High</th>
+             <th scope="col">week52Low</th>
+           </tr>
+         </thead  >
+         <tbody>
+           <tr>
+             <th scope="row">{{api.companyName}}</th>
+             <td>${{api.latestPrice}}</td>
+             <td>${{api.marketCap}}</td>
+             <td>{{api.ytdChange}}  %</td>
+             <td>${{api.week52High}}</td>
+             <td> ${{api.week52Low}}</td>
+             
+             </tr>
+         </tbody>
+       </table><br>
+    {% endif %}
+{% endif %}
+
+
+
+
+{% endblock %}
